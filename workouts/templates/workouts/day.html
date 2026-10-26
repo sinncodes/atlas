@@ -1,0 +1,12 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
+</head>
+<body>
+  <h2>{{ date|date:"l j F Y" }}</h2>
+  <p>Nothing here yet.</p>
+  <a href="{% url 'workouts:calendar' date.year date.month %}">← Back to calendar</a>
+</body>
+</html>

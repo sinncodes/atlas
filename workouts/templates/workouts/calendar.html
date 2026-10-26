@@ -17,14 +17,14 @@
   {% for week in weeks %}
   <tr>
     {% for day in week %}
-      {% if day == 0 %}
-        <td></td>
-      {% elif day == today_day %}
-        <td class="today">{{ day }}</td>
-      {% else %}
-        <td>{{ day }}</td>
-      {% endif %}
-    {% endfor %}
+  {% if day == 0 %}
+    <td></td>
+  {% elif day == today_day %}
+    <td class="today"><a href="{% url 'workouts:day' year month day %}">{{ day }}</a></td>
+  {% else %}
+    <td><a href="{% url 'workouts:day' year month day %}">{{ day }}</a></td>
+  {% endif %}
+{% endfor %}
   </tr>
   {% endfor %}
 </table>
