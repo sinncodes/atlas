@@ -1,17 +1,14 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
-<style>
-table, th, td { border: 1px solid black; }
-td.today { background: gold; font-weight: bold; }
-</style>
+<!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
+</head>
 <body>
-
-
 
 <h2 style="text-align:center">{{ month_name }} {{ year }}</h2>
 
-<table style="width:100%">
+<table style="width:80%">
   <tr>
     <th>Monday</th><th>Tuesday</th><th>Wednesday</th>
     <th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th>
