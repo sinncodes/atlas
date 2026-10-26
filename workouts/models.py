@@ -57,6 +57,11 @@ class WorkoutExercise(models.Model):
     def __str__(self):
         return self.workout.name + " - " + self.exercise.name
 
+class ScheduledWorkout(models.Model):
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="scheduled")
+    date = models.DateField()
+    """this will map a workout to a date"""
+
 """workout.workout_exercises.all() to get all workout's exercises,
 routine.workouts.all() to get all workouts in a routine
 user.routines.all() to retrieve all users routines"""
