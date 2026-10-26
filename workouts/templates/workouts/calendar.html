@@ -1,80 +1,36 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
 <style>
-table, th, td {
-  border:1px solid black;
-}
+table, th, td { border: 1px solid black; }
+td.today { background: gold; font-weight: bold; }
 </style>
+<html>
 <body>
 
-<h2>"Month and Year" //centered</h2>
+
+
+<h2 style="text-align:center">{{ month_name }} {{ year }}</h2>
+
 <table style="width:100%">
   <tr>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-    <th>Sunday</th>
+    <th>Monday</th><th>Tuesday</th><th>Wednesday</th>
+    <th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
-  </tr>
-</table>
 
-<p>To understand the example better, we have added borders to the table.</p>
+  {% for week in weeks %}
+  <tr>
+    {% for day in week %}
+      {% if day == 0 %}
+        <td></td>
+      {% elif day == today_day %}
+        <td class="today">{{ day }}</td>
+      {% else %}
+        <td>{{ day }}</td>
+      {% endif %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
 
 </body>
 </html>

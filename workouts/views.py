@@ -15,12 +15,14 @@ def calendar_view(request, year=None, month=None):
 
     if not 1 <= month <= 12:
         raise Http404("Invalid month")
-    #generate the calendar data here.
-    context = {
-        "today": today,
-        "year": year,
-        "month": month,
-    }
 
-    return render(request, "workouts/calendar.html", context)
+    cal = calendar.Calendar(firstweekday=0)
+    weeks = cal.monthdatescalendar(year, month)
+
+    return render(request, "workouts/calendar.html", {
+        "weeks": weeks,
+        "month_name": calendar.month_name[month],
+        "year": year,
+        "today_day": today,
+    })
 

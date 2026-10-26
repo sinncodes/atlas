@@ -1,0 +1,4 @@
+li a{
+table, th, td { border: 1px solid black; }
+td.today { background: gold; font-weight: bold; }
+}
