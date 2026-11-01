@@ -1,67 +1,48 @@
 from django.db import models
 from django.conf import settings
 
+
+#model for storing a muscle
 class Muscle(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
+
+#model for storing an exercise, and the muscles it works
 class Exercise(models.Model):
     name = models.CharField(max_length=50)
     muscles = models.ManyToManyField(Muscle, related_name="exercises")
-
     
     def __str__(self):
         return self.name
 
-class Routine(models.Model):
-    name = models.CharField(max_length=50)
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="routines"
-    )
-
-
-    def __str__(self):
-        return self.name
-
+#model for storing a workout, and its exercises
 class Workout(models.Model):
     name = models.CharField(max_length=50)
-    routine = models.ForeignKey(
-        Routine,
-        on_delete=models.CASCADE,
-        related_name="workouts"
-    )
 
     def __str__(self):
         return self.name
 
+
+#model for mapping the exercises to a workout, setting sets and reps
 class WorkoutExercise(models.Model):
-    workout = models.ForeignKey(
-        Workout,
-        on_delete=models.CASCADE,
-        related_name="workout_exercises"
-    )
-    exercise = models.ForeignKey(
-        Exercise,
-        on_delete=models.CASCADE,
-        related_name="workout_exercises"
-    )
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="workout_exercises")
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name="workout_exercises")
+
     sets = models.PositiveIntegerField()
     reps = models.PositiveIntegerField()
-    order = models.PositiveIntegerField(default = 0)
 
     def __str__(self):
         return self.workout.name + " - " + self.exercise.name
 
+
+#model for scheduling a workout to a date
 class ScheduledWorkout(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="scheduled")
     date = models.DateField()
-    """this will map a workout to a date"""
-
-"""workout.workout_exercises.all() to get all workout's exercises,
-routine.workouts.all() to get all workouts in a routine
-user.routines.all() to retrieve all users routines"""
+    
+    def __str__(self):
+        return self.workout.name
