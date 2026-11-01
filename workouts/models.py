@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-
 
 #model for storing a muscle
 class Muscle(models.Model):
@@ -45,4 +43,4 @@ class ScheduledWorkout(models.Model):
     date = models.DateField()
     
     def __str__(self):
-        return self.workout.name
+        return f"{self.workout.name} on {self.date}"

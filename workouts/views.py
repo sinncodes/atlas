@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 import datetime
+from .models import ScheduledWorkout
 
 
 def index(request):
@@ -33,5 +34,6 @@ def day_view(request, year, month, day):
         date = datetime.date(year, month, day)
     except ValueError:
         raise Http404("Invalid date")
+    scheduled = ScheduledWorkout.objects.filter(date=date)
 
-    return render(request, "workouts/day.html", {"date": date})
+    return render(request, "workouts/day.html", {"date": date, "scheduled": scheduled,})
