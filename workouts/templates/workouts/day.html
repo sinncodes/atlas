@@ -1,16 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html>
-<head>
-  <link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
-</head>
-<body>
-  <h2>{{ date|date:"l j F Y" }}</h2>
-{% for item in scheduled %}
-  <h3>{{ item.workout.name }}</h3>
-{% empty %}
-  <p>Nothing scheduled.</p>
-{% endfor %}
-  <a href="{% url 'workouts:calendar' date.year date.month %}">← Back to calendar</a>
-</body>
+
+  <head>
+      <link rel="stylesheet" href="{% static 'workouts/calendar.css' %}">
+  </head>
+
+  <body>
+    <h2>{{ date|date:"l j F Y" }}</h2>
+    {% for item in scheduled %}
+      <h3>{{ item.workout.name }}</h3>
+      <ul>
+        {% for line in item.workout.workout_exercises.all %}
+          <li>{{ line.exercise.name }}: {{ line.sets }} x {{ line.reps }}</li>
+        {% endfor %}
+      </ul>
+    {% empty %}
+      <p>Nothing scheduled.</p>
+    {% endfor %}
+      <a href="{% url 'workouts:calendar' date.year date.month %}">← Back to calendar</a>
+  </body>
+
 </html>
