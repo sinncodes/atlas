@@ -1,0 +1,9 @@
+body { font-family: sans-serif; margin: 1rem; }
+
+h2.today { color: goldenrod; }
+
+h3 { margin-bottom: 0.25rem; }
+
+ul { margin-top: 0; }
+
+a { display: inline-block; margin-top: 1rem; }

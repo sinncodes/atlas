@@ -34,6 +34,9 @@ def day_view(request, year, month, day):
         date = datetime.date(year, month, day)
     except ValueError:
         raise Http404("Invalid date")
+    
     scheduled = ScheduledWorkout.objects.filter(date=date)
 
-    return render(request, "workouts/day.html", {"date": date, "scheduled": scheduled,})
+    is_today = (date == timezone.localdate())
+
+    return render(request, "workouts/day.html", {"date": date, "scheduled": scheduled, "is_today":is_today},)
